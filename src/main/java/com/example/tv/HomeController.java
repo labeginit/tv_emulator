@@ -25,10 +25,13 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Image image = new Image(new File("giphy.gif").toURI().toString());
+        Image image2 = new Image(new File("newpicture.gif").toURI().toString());
         int channel = Singleton.getInstance().getChannel();
         if (channel != 0) {
             if (channel == 5) {
                 gif.setImage(image);
+            } else if (channel == 2) {
+                gif.setImage(image2);
             } else {
                 welcomeText.setText("Channel " + channel);
             }
