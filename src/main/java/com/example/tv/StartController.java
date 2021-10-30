@@ -1,19 +1,12 @@
 package com.example.tv;
 
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.*;
 import java.util.ResourceBundle;
 
 public class StartController implements Initializable {
@@ -21,45 +14,31 @@ public class StartController implements Initializable {
     @FXML
     Button startButton;
 
+    @FXML
+    AnchorPane anchorPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Task task = new Task() {
-            @Override
-            protected Object call() {
-                FileHandler fileHandler = new FileHandler();
-                int a = fileHandler.test();
-                if (a == 1) {
-                    startTV();
-                }
-                return null;
-            }
-        };
-        Thread thread = new Thread(task);
-        thread.start();
+        if (Singleton.getInstance().getNumber() == 0) {
+            ServerHandler fileHandler = new ServerHandler();
+            fileHandler.start();
+        }
 
-    }
 
-    public void toHome(ActionEvent event) {
-        Singleton.getInstance().changeScene(event, "home-view.fxml");
-    }
-    public void startTV() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("home-view.fxml"));
-                Parent mainCallWindowFXML = null;
+        Thread t1 = new Thread(() -> {
+            while (Singleton.getInstance().getNumber() != 1) {
                 try {
-                    mainCallWindowFXML = loader.load();
-                } catch (IOException e) {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                Stage stage = (Stage)startButton.getScene().getWindow();//or use any other component in your controller
-                Scene mainCallWindow = new Scene (mainCallWindowFXML, 800, 600);
-                stage.setScene(mainCallWindow);
-                stage.show();
             }
+            startTV();
         });
+        t1.start();
+    }
+
+    public void startTV() {
+        Platform.runLater(() -> Singleton.getInstance().changeScene(anchorPane, "home-view.fxml"));
     }
 }

@@ -1,18 +1,24 @@
 package com.example.tv;
 
-import javafx.event.ActionEvent;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
+import javafx.util.Duration;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+
+    @FXML
+    AnchorPane anchorPane;
 
     @FXML
     Button startButton, channelButton;
@@ -20,31 +26,78 @@ public class HomeController implements Initializable {
     @FXML
     Label welcomeText;
 
-    @FXML ImageView gif;
+    @FXML
+    Pane pane;
+
+    @FXML
+    VBox vBox;
+
+    @FXML
+    WebView webView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image image = new Image(new File("giphy.gif").toURI().toString());
-        Image image2 = new Image(new File("newpicture.gif").toURI().toString());
+        webView = new WebView();
+        String video = "https://www.youtube.com/embed/SJUS2ZuZ7go?autoplay=1";
+
         int channel = Singleton.getInstance().getChannel();
         if (channel != 0) {
-            if (channel == 5) {
-                gif.setImage(image);
-            } else if (channel == 2) {
-                gif.setImage(image2);
-            } else {
-                welcomeText.setText("Channel " + channel);
+            if (channel == 2) {
+                video = "https://www.youtube.com/embed/jfzRSpiqtQA?autoplay=1";
+            } else if (channel == 3) {
+                video = "https://www.youtube.com/embed/qBZ_2j_a_1g?autoplay=1";
             }
         } else {
-            welcomeText.setText("Channel " + 1);
+            channel = 1;
         }
+
+        webView.getEngine().load(video);
+        webView.setPrefSize(700, 800);
+        webView.setDisable(true);
+        vBox.getChildren().addAll(webView);
+
+        PauseTransition wait = new PauseTransition(Duration.seconds(1));
+        int finalChannel = channel;
+        wait.setOnFinished((e) -> {
+            welcomeText.setText("Channel " + finalChannel);
+            pane.setVisible(true);
+            PauseTransition wait2 = new PauseTransition(Duration.seconds(5));
+            wait2.setOnFinished((e2) -> pane.setVisible(false));
+            wait2.play();
+        });
+        wait.play();
+
+        Thread t1 = new Thread(() -> {
+
+            while (Singleton.getInstance().getNumber() != 2 && Singleton.getInstance().getNumber() != 3) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (Singleton.getInstance().getNumber() == 3) {
+                toChannel();
+            } else {
+                turnOff();
+            }
+        });
+        t1.start();
+
     }
 
-    public void toChannel(ActionEvent event) {
-        Singleton.getInstance().changeScene(event, "channels-view.fxml");
+    public void toChannel() {
+        Platform.runLater(() -> {
+            webView.getEngine().load(null);
+            Singleton.getInstance().changeScene(anchorPane, "channels-view.fxml");
+        });
     }
 
-    public void turnOff(ActionEvent event) {
-        Singleton.getInstance().changeScene(event, "start-view.fxml");
+    public void turnOff() {
+        Platform.runLater(() -> {
+            webView.getEngine().load(null);
+            Singleton.getInstance().setNumber(10);
+            Singleton.getInstance().changeScene(anchorPane, "start-view.fxml");
+        });
     }
 }

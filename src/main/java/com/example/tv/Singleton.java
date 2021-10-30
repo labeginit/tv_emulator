@@ -1,19 +1,28 @@
 package com.example.tv;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Singleton {
     private int channel;
+    private int number;
     private final static Singleton INSTANCE = new Singleton();
 
-    private Singleton() {}
+    private Singleton() {
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     public static Singleton getInstance() {
         return INSTANCE;
@@ -27,14 +36,19 @@ public class Singleton {
         return this.channel;
     }
 
-    public void changeScene(ActionEvent event, String a) {
+    public void changeScene(AnchorPane event, String a) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(a));
+        Parent mainCallWindowFXML = null;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(a));
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            window.setScene(new Scene(root,800,700));
-            window.show();
+            mainCallWindowFXML = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Stage stage = (Stage) event.getScene().getWindow();//or use any other component in your controller
+        assert mainCallWindowFXML != null;
+        Scene mainCallWindow = new Scene(mainCallWindowFXML, 800, 700);
+        stage.setScene(mainCallWindow);
+        stage.show();
     }
 }
