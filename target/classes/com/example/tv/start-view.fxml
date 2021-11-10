@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tv.StartController">
-   <children>
-      <Label fx:id="welcomeText" alignment="CENTER" layoutX="324.0" layoutY="327.0" text="No signal..." textFill="WHITE">
+
+<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tv.StartController">
+   <Pane layoutY="657.0" prefHeight="48.0" prefWidth="807.0" style="-fx-background-color: #170809;">
+      <Label layoutX="372.0" layoutY="2.0" text="FC4" textFill="WHITE">
          <font>
-            <Font size="39.0" />
+            <Font name="Arial Black" size="30.0" />
          </font>
+         <effect>
+            <InnerShadow choke="0.11" height="18.03" radius="7.032500000000001" width="12.1" />
+         </effect>
       </Label>
-      <Button fx:id="startButton" layoutX="373.0" layoutY="454.0" mnemonicParsing="false" onAction="#startTV"
-              text="start"/>
-   </children>
+      <Circle fill="#750003" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+   </Pane>
 </AnchorPane>

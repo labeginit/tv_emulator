@@ -20,14 +20,14 @@ public class ServerHandler extends Thread {
                 System.out.println(message);
                 if (message.contains("on")) {
                     if (message.contains("true")) {
-                        Singleton.getInstance().setNumber(1);
+                        Singleton.getInstance().setCommand(1);
                     } else {
-                        Singleton.getInstance().setNumber(2);
+                        Singleton.getInstance().setCommand(2);
                     }
                 } else if (message.contains("channel")) {
                     JSONObject json = new JSONObject(message);
                     String channel = json.getString("channel");
-                    Singleton.getInstance().setNumber(Integer.parseInt(channel));
+                    Singleton.getInstance().setCommand(Integer.parseInt(channel));
                 }
                 // 1 = start tv
                 // 2 = turn off

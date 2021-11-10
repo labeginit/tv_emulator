@@ -9,19 +9,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Singleton {
-    private int channel;
-    private int number;
+    private int channel = 1;
+    private int command;
     private final static Singleton INSTANCE = new Singleton();
 
     private Singleton() {
     }
 
-    public int getNumber() {
-        return number;
+    public int getCommand() {
+        return command;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setCommand(int Command) {
+        this.command = Command;
     }
 
     public static Singleton getInstance() {

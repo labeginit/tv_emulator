@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class ChannelsController implements Initializable {
     @FXML
-    ListView list;
+    ListView<String> list;
 
     @FXML
     AnchorPane anchorPane;
@@ -21,23 +21,28 @@ public class ChannelsController implements Initializable {
         for (int a = 0; a < 15; a++) {
             list.getItems().add("Channel " + (a + 1));
         }
-        list.getSelectionModel().select(0);
+        int channel = Singleton.getInstance().getChannel() - 1;
+        list.getSelectionModel().select(channel);
+        list.scrollTo(channel);
+
         Thread t1 = new Thread(() -> {
             while (true) {
-                System.out.println("Hello");
-                while (Singleton.getInstance().getNumber() != 4 && Singleton.getInstance().getNumber() != 5 && Singleton.getInstance().getNumber() != 6) {
+                while (Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 4 && Singleton.getInstance().getCommand() != 5 && Singleton.getInstance().getCommand() != 6) {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                int a = Singleton.getInstance().getNumber();
-                Singleton.getInstance().setNumber(9);
+                int a = Singleton.getInstance().getCommand();
+                Singleton.getInstance().setCommand(9);
                 if (a == 4) {
                     goDown();
                 } else if (a == 5) {
                     goUp();
+                } else if (a == 2) {
+                    turnOff();
+                    break;
                 } else {
                     confirm();
                     break;
@@ -76,8 +81,15 @@ public class ChannelsController implements Initializable {
         Platform.runLater(() -> {
             int a = list.getSelectionModel().getSelectedIndex();
             Singleton.getInstance().setChannel((a + 1));
-            Singleton.getInstance().setNumber(0);
+            Singleton.getInstance().setCommand(0);
             Singleton.getInstance().changeScene(anchorPane, "home-view.fxml");
+        });
+    }
+
+    public void turnOff() {
+        Platform.runLater(() -> {
+            Singleton.getInstance().setCommand(10);
+            Singleton.getInstance().changeScene(anchorPane, "start-view.fxml");
         });
     }
 }
