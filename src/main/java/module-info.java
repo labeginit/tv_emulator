@@ -7,6 +7,7 @@ module com.example.tv {
     requires org.json;
 
 
+
     opens com.example.tv to javafx.fxml;
     exports com.example.tv;
 }

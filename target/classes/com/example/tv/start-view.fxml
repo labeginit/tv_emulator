@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tv.StartController">
    <Pane layoutY="657.0" prefHeight="48.0" prefWidth="807.0" style="-fx-background-color: #170809;">
       <Label layoutX="372.0" layoutY="2.0" text="FC4" textFill="WHITE">

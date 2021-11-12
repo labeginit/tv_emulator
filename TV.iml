@@ -15,9 +15,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="tyrus-standalone-client-1.9" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20210307" level="project" />
-    <orderEntry type="library" name="Maven: javax.websocket:javax.websocket-api:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-client:2.29" level="project" />
     <orderEntry type="library" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:2.1.5" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-common:2.29" level="project" />
@@ -43,22 +41,23 @@
     <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:18-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:18-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:18-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:18-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-web:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:win:18-ea+4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:18-ea+4" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac:18-ea+4" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:18-ea+4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.tyrus.bundles:tyrus-standalone-client:1.9" level="project" />
   </component>
 </module>
