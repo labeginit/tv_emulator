@@ -12,9 +12,9 @@ public class ServerHandler extends Thread {
         try {
             // open websocket
             //local
-            final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://localhost:8080/websocket"));
+            //final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://localhost:8080/websocket"));
             //extern
-            //final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://ro01.beginit.se:1337/websocket"));
+            final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://ro01.beginit.se:1337/websocket"));
 
             //Need this to connect to server
             clientEndPoint.sendMessage("getTVStatus");
