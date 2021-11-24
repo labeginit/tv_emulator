@@ -11,7 +11,10 @@ public class ServerHandler extends Thread {
         super.run();
         try {
             // open websocket
-            final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://Ro01.beginit.se:1337/websocket"));
+            //local
+            final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://localhost:8080/websocket"));
+            //extern
+            //final WebsocketClientEndpoint clientEndPoint = new WebsocketClientEndpoint(new URI("ws://ro01.beginit.se:1337/websocket"));
 
             //Need this to connect to server
             clientEndPoint.sendMessage("getTVStatus");
@@ -19,22 +22,16 @@ public class ServerHandler extends Thread {
             clientEndPoint.addMessageHandler(message -> {
                 System.out.println(message);
                 if (message.contains("on")) {
-                    if (message.contains("true")) {
-                        Singleton.getInstance().setCommand(1);
-                    } else {
-                        Singleton.getInstance().setCommand(2);
-                    }
+                    Singleton.getInstance().setCommand(1);
                 } else if (message.contains("channel")) {
                     JSONObject json = new JSONObject(message);
                     String channel = json.getString("channel");
                     Singleton.getInstance().setCommand(Integer.parseInt(channel));
                 }
                 // 1 = start tv
-                // 2 = turn off
-                // 3 = channel list
-                // 4 = channel down
-                // 5 = channel up
-                // 6 = confirm
+                // 2 = confirm/go to list
+                // 3 = channel down
+                // 4 = channel up
             });
 
         } catch (URISyntaxException ex) {

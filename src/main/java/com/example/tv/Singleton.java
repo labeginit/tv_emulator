@@ -7,13 +7,32 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Timer;
 
 public class Singleton {
     private int channel = 1;
     private int command;
+    private int hdmi = 1;
+    private Timer timer;
     private final static Singleton INSTANCE = new Singleton();
 
     private Singleton() {
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public int getHdmi() {
+        return hdmi;
+    }
+
+    public void setHdmi(int hdmi) {
+        this.hdmi = hdmi;
     }
 
     public int getCommand() {

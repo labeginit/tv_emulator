@@ -11,7 +11,8 @@
             xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.tv.HomeController">
     <VBox fx:id="vBox" prefHeight="656.0" prefWidth="805.0" style="-fx-background-color: green;"/>
-    <Pane fx:id="pane" layoutY="519.0" prefHeight="137.0" prefWidth="805.0" style="-fx-background-color: #474747;">
+    <Pane fx:id="pane" layoutY="519.0" prefHeight="137.0" prefWidth="805.0" style="-fx-background-color: #474747;"
+          visible="false">
         <Label fx:id="welcomeText" alignment="CENTER" textFill="WHITE">
             <font>
                 <Font size="39.0"/>

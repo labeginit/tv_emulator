@@ -35,6 +35,7 @@ public class StartController implements Initializable {
     }
 
     public void startTV() {
+        Singleton.getInstance().setCommand(9);
         Platform.runLater(() -> Singleton.getInstance().changeScene(anchorPane, "home-view.fxml"));
     }
 }

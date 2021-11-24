@@ -27,15 +27,7 @@ public class ChannelsController implements Initializable {
 
         Thread t1 = new Thread(() -> {
             while (true) {
-                while (Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 4 && Singleton.getInstance().getCommand() != 5 && Singleton.getInstance().getCommand() != 6) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                int a = Singleton.getInstance().getCommand();
-                Singleton.getInstance().setCommand(9);
+                int a = MenuController.lookForChange();
                 if (a == 4) {
                     goDown();
                 } else if (a == 5) {

@@ -4,7 +4,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -21,9 +20,6 @@ public class HomeController implements Initializable {
     AnchorPane anchorPane;
 
     @FXML
-    Button startButton, channelButton;
-
-    @FXML
     Label welcomeText;
 
     @FXML
@@ -38,62 +34,47 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         webView = new WebView();
-        loadChannel();
+
+        //Check if a new source was chosen
+        int hdmi = Singleton.getInstance().getHdmi();
+        String temp = String.valueOf(hdmi);
+        if (temp.contains("0")) {
+            hdmi = Integer.parseInt(String.valueOf(temp.charAt(0)));
+            Singleton.getInstance().setHdmi(hdmi);
+        }
+        if (hdmi == 1) {
+            loadChannel();
+        } else {
+            //Load HDMI 2
+        }
 
         Thread t1 = new Thread(() -> {
             while (true) {
-                while (Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 3 && Singleton.getInstance().getCommand() != 4 && Singleton.getInstance().getCommand() != 5) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                int a = Singleton.getInstance().getCommand();
-                Singleton.getInstance().setCommand(9);
-
-                if (a == 3) {
-                    toChannel();
+                int a = MenuController.lookForChange();
+                if (a == 2) {
+                    toMenu();
                     break;
-                } else if (a == 2) {
+                } else if (a == 1) {
                     turnOff();
                     break;
+                } else if (a == 3) {
+                    volumeDown();
                 } else if (a == 4) {
-                    goDownChannel();
-                } else if (a == 5) {
-                    goUpChannel();
+                    volumeUP();
                 }
             }
         });
         t1.start();
+
     }
 
-    public void goDownChannel() {
-        Platform.runLater(() -> {
-            int channel = Singleton.getInstance().getChannel();
-            if (channel != 15) {
-                Singleton.getInstance().setChannel(channel + 1);
-            } else {
-                Singleton.getInstance().setChannel(1);
-            }
-            loadChannel();
-        });
+    public void volumeDown() {
     }
 
-    public void goUpChannel() {
-        Platform.runLater(() -> {
-            int channel = Singleton.getInstance().getChannel();
-            if (channel != 1) {
-                Singleton.getInstance().setChannel(channel - 1);
-            } else {
-                Singleton.getInstance().setChannel(15);
-            }
-            loadChannel();
-        });
+    public void volumeUP() {
     }
 
     public void loadChannel() {
-
         int newChannel = Singleton.getInstance().getChannel();
         String video = "";
         if (newChannel != 0) {
@@ -128,10 +109,10 @@ public class HomeController implements Initializable {
         wait.play();
     }
 
-    public void toChannel() {
+    public void toMenu() {
         Platform.runLater(() -> {
             webView.getEngine().load(null);
-            Singleton.getInstance().changeScene(anchorPane, "channels-view.fxml");
+            Singleton.getInstance().changeScene(anchorPane, "menu-view.fxml");
         });
     }
 
