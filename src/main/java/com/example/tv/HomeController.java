@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +31,13 @@ public class HomeController implements Initializable {
 
     @FXML
     WebView webView;
+
+    @FXML
+    Pane volumePane;
+
+    @FXML
+    Label volumeLabel;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,9 +77,41 @@ public class HomeController implements Initializable {
     }
 
     public void volumeDown() {
+        Platform.runLater(() -> {
+            int tempVolume = Singleton.getInstance().getVolume() - 5;
+
+            if (tempVolume < 0) {
+                Singleton.getInstance().setVolume(0);
+            } else {
+                Singleton.getInstance().setVolume(tempVolume);
+            }
+
+            volumeLabel.setText("+\n" + (Singleton.getInstance().getVolume()) + "\n-");
+            volumePane.setVisible(true);
+            PauseTransition show = new PauseTransition(Duration.seconds(5));
+            show.setOnFinished((E) -> volumePane.setVisible(false));
+            show.play();
+        });
+
+
     }
 
     public void volumeUP() {
+        Platform.runLater(() -> {
+            int tempVolume = Singleton.getInstance().getVolume() + 5;
+
+            if (tempVolume > 100) {
+                Singleton.getInstance().setVolume(100);
+            } else {
+                Singleton.getInstance().setVolume(tempVolume);
+            }
+            volumeLabel.setText("+\n" + (Singleton.getInstance().getVolume()) + "\n-");
+            volumePane.setVisible(true);
+            PauseTransition show = new PauseTransition(Duration.seconds(5));
+            show.setOnFinished((E) -> volumePane.setVisible(false));
+            show.play();
+
+        });
     }
 
     public void loadChannel() {
@@ -102,6 +142,8 @@ public class HomeController implements Initializable {
         wait.setOnFinished((e) -> {
             welcomeText.setText("Channel " + channel);
             pane.setVisible(true);
+
+
             PauseTransition wait2 = new PauseTransition(Duration.seconds(5));
             wait2.setOnFinished((e2) -> pane.setVisible(false));
             wait2.play();

@@ -12,6 +12,7 @@ import java.util.Timer;
 public class Singleton {
     private int channel = 1;
     private int command;
+    private int volume=100;
     private int hdmi = 1;
     private Timer timer;
     private final static Singleton INSTANCE = new Singleton();
@@ -53,6 +54,14 @@ public class Singleton {
 
     public int getChannel() {
         return this.channel;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 
     public void changeScene(AnchorPane event, String a) {
