@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #877171;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tv.HomeController">
-    <VBox fx:id="vBox" prefHeight="656.0" prefWidth="805.0" style="-fx-background-color: green;" />
-    <Pane fx:id="pane" layoutY="519.0" prefHeight="137.0" prefWidth="805.0" style="-fx-background-color: #474747;" visible="false">
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="anchorPane" prefHeight="700.0" prefWidth="709.0" style="-fx-background-color: #877171;"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tv.HomeController">
+    <VBox fx:id="vBox" prefHeight="656.0" prefWidth="805.0" style="-fx-background-color: green;"/>
+    <Pane fx:id="pane" layoutY="519.0" prefHeight="137.0" prefWidth="805.0" style="-fx-background-color: #474747;"
+          visible="false">
         <Label fx:id="welcomeText" alignment="CENTER" textFill="WHITE">
             <font>
-                <Font size="39.0" />
+                <Font size="39.0"/>
             </font>
         </Label>
     </Pane>
-    <Pane layoutY="657.0" prefHeight="48.0" prefWidth="807.0" style="-fx-background-color: #170809;">
+    <Pane layoutY="657.0" prefHeight="48.0" prefWidth="806.0" style="-fx-background-color: #170809;">
         <Label layoutX="372.0" layoutY="2.0" text="FC4" textFill="WHITE">
             <font>
-                <Font name="Arial Black" size="30.0" />
+                <Font name="Arial Black" size="30.0"/>
             </font>
             <effect>
-                <InnerShadow choke="0.11" height="18.03" radius="7.032500000000001" width="12.1" />
+                <InnerShadow choke="0.11" height="18.03" radius="7.032500000000001" width="12.1"/>
             </effect>
         </Label>
-        <Circle fill="#36ff1f" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="#36ff1f" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
     </Pane>
-   <Pane fx:id="volumePane" layoutX="593.0" layoutY="263.0" prefHeight="143.0" prefWidth="212.0" stylesheets="@styles.css" visible="false">
-      <children>
-         <Label fx:id="volumeLabel" alignment="CENTER" prefHeight="143.0" prefWidth="259.0" stylesheets="@styles.css" text="TEST" textAlignment="CENTER" textFill="WHITE">
+    <Pane fx:id="volumePane" layoutX="593.0" layoutY="263.0" prefHeight="143.0" prefWidth="213.0"
+          stylesheets="@styles.css" visible="false">
+        <Label fx:id="volumeLabel" alignment="CENTER" prefHeight="143.0" prefWidth="259.0" stylesheets="@styles.css"
+               text="TEST" textAlignment="CENTER" textFill="WHITE">
             <font>
-               <Font name="System Bold" size="20.0" />
+                <Font name="System Bold" size="20.0"/>
             </font>
-         </Label>
-      </children>
-   </Pane>
+        </Label>
+    </Pane>
+    <Pane fx:id="mediation" layoutX="113.0" layoutY="198.0" prefHeight="209.0" prefWidth="591.0"
+          style="-fx-background-color: rgba(0,0,0,0.46);" visible="false">
+        <Label alignment="CENTER" prefHeight="247.0" prefWidth="591.0"
+               text="Low Mediation, TV will turn off in 20 Sec. Do command to Cancel" textAlignment="CENTER"
+               textFill="WHITE" wrapText="true">
+            <font>
+                <Font name="Apple Symbols" size="38.0"/>
+            </font>
+        </Label>
+    </Pane>
+    <Pane fx:id="sourcePane" layoutX="533.0" prefHeight="182.0" prefWidth="272.0"
+          style="-fx-background-color: rgba(0,0,0,0.46);" visible="false">
+        <Label fx:id="sourceLabel" alignment="CENTER" prefHeight="183.0" prefWidth="273.0" textAlignment="CENTER"
+               textFill="WHITE">
+            <font>
+                <Font name="Apple Symbols" size="38.0"/>
+            </font>
+        </Label>
+    </Pane>
 </AnchorPane>

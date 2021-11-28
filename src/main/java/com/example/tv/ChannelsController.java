@@ -5,9 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.example.tv.HomeController.mediationInfo;
 
 public class ChannelsController implements Initializable {
     @FXML
@@ -15,6 +18,9 @@ public class ChannelsController implements Initializable {
 
     @FXML
     AnchorPane anchorPane;
+
+    @FXML
+    Pane mediation;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -28,16 +34,20 @@ public class ChannelsController implements Initializable {
         Thread t1 = new Thread(() -> {
             while (true) {
                 int a = MenuController.lookForChange();
-                if (a == 4) {
-                    goDown();
-                } else if (a == 5) {
-                    goUp();
-                } else if (a == 2) {
-                    turnOff();
-                    break;
-                } else {
+                if (a == 2) {
                     confirm();
                     break;
+                } else if (a == 1) {
+                    turnOff();
+                    break;
+                } else if (a == 3) {
+                    goDown();
+                } else if (a == 4) {
+                    goUp();
+                } else if (a == 5) {
+                    mediationInfo(mediation, 1);
+                } else if (a == 6) {
+                    mediationInfo(mediation, 0);
                 }
             }
         });

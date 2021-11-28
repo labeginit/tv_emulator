@@ -22,6 +22,8 @@ public class ServerHandler extends Thread {
             clientEndPoint.addMessageHandler(message -> {
                 System.out.println(message);
                 if (message.contains("on")) {
+                    boolean status = Singleton.getInstance().isOn();
+                    Singleton.getInstance().setOn(!status);
                     Singleton.getInstance().setCommand(1);
                 } else if (message.contains("channel")) {
                     JSONObject json = new JSONObject(message);
@@ -32,6 +34,8 @@ public class ServerHandler extends Thread {
                 // 2 = confirm/go to list
                 // 3 = channel down
                 // 4 = channel up
+                // 5 = meditation pop up
+                // 6 = cancel meditation pop up
             });
 
         } catch (URISyntaxException ex) {

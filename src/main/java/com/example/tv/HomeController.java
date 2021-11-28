@@ -11,20 +11,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeController implements Initializable {
 
+
     @FXML
     AnchorPane anchorPane;
-
-    @FXML
-    Label welcomeText;
-
-    @FXML
-    Pane pane;
 
     @FXML
     VBox vBox;
@@ -33,10 +29,10 @@ public class HomeController implements Initializable {
     WebView webView;
 
     @FXML
-    Pane volumePane;
+    Label volumeLabel, sourceLabel, welcomeText;
 
     @FXML
-    Label volumeLabel;
+    Pane pane, sourcePane, volumePane, mediation;
 
 
     @Override
@@ -49,6 +45,11 @@ public class HomeController implements Initializable {
         if (temp.contains("0")) {
             hdmi = Integer.parseInt(String.valueOf(temp.charAt(0)));
             Singleton.getInstance().setHdmi(hdmi);
+            sourcePane.setVisible(true);
+            sourceLabel.setText("HDMI " + hdmi);
+            PauseTransition show = new PauseTransition(Duration.seconds(5));
+            show.setOnFinished((E) -> sourcePane.setVisible(false));
+            show.play();
         }
         if (hdmi == 1) {
             loadChannel();
@@ -69,10 +70,41 @@ public class HomeController implements Initializable {
                     volumeDown();
                 } else if (a == 4) {
                     volumeUP();
+                } else if (a == 5) {
+                    mediationInfo(mediation, 1);
+                } else if (a == 6) {
+                    mediationInfo(mediation, 0);
                 }
             }
         });
         t1.start();
+
+    }
+
+    static void mediationInfo(Pane mediations, int status) {
+        if (status == 1) {
+            mediations.setVisible(true);
+            Timer previousTimer = Singleton.getInstance().getTimer();
+            if (previousTimer != null) {
+                previousTimer.cancel();
+            }
+            Timer timer = new Timer();
+            timer.schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (Singleton.getInstance().isOn()) {
+                                Singleton.getInstance().setCommand(1);
+                            }
+                        }
+                    },
+                    20000
+            );
+            Singleton.getInstance().setMeditationTimer(timer);
+        } else {
+            mediations.setVisible(false);
+            Singleton.getInstance().getMeditationTimer().cancel();
+        }
 
     }
 

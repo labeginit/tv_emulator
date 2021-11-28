@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static com.example.tv.HomeController.mediationInfo;
 
 public class MenuController implements Initializable {
 
@@ -19,6 +22,9 @@ public class MenuController implements Initializable {
     @FXML
     TextField channel, sleep1, sleep2, sleep3, hdmi1, hdmi2;
 
+    @FXML
+    Pane mediation;
+
     int marked = 1;
 
     @Override
@@ -27,16 +33,20 @@ public class MenuController implements Initializable {
         Thread t1 = new Thread(() -> {
             while (true) {
                 int a = lookForChange();
-                if (a == 3) {
-                    goDown();
-                } else if (a == 4) {
-                    goUp();
-                } else if (a == 1) {
+                if (a == 1) {
                     turnOff();
                     break;
                 } else if (a == 2) {
                     confirm();
                     break;
+                } else if (a == 3) {
+                    goDown();
+                } else if (a == 4) {
+                    goUp();
+                } else if (a == 5) {
+                    mediationInfo(mediation, 1);
+                } else if (a == 6) {
+                    mediationInfo(mediation, 0);
                 }
             }
         });
@@ -44,7 +54,7 @@ public class MenuController implements Initializable {
     }
 
     static int lookForChange() {
-        while (Singleton.getInstance().getCommand() != 1 && Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 3 && Singleton.getInstance().getCommand() != 4) {
+        while (Singleton.getInstance().getCommand() != 1 && Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 3 && Singleton.getInstance().getCommand() != 4 && Singleton.getInstance().getCommand() != 5 && Singleton.getInstance().getCommand() != 6) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -146,7 +156,9 @@ public class MenuController implements Initializable {
                         new TimerTask() {
                             @Override
                             public void run() {
-                                Singleton.getInstance().setCommand(1);
+                                if (Singleton.getInstance().isOn()) {
+                                    Singleton.getInstance().setCommand(1);
+                                }
                             }
                         },
                         time

@@ -12,12 +12,30 @@ import java.util.Timer;
 public class Singleton {
     private int channel = 1;
     private int command;
-    private int volume=100;
+    private int volume = 100;
     private int hdmi = 1;
+    private boolean on = false;
     private Timer timer;
+    private Timer meditationTimer;
     private final static Singleton INSTANCE = new Singleton();
 
     private Singleton() {
+    }
+
+    public boolean isOn() {
+        return on;
+    }
+
+    public Timer getMeditationTimer() {
+        return meditationTimer;
+    }
+
+    public void setMeditationTimer(Timer meditationTimer) {
+        this.meditationTimer = meditationTimer;
+    }
+
+    public void setOn(boolean on) {
+        this.on = on;
     }
 
     public Timer getTimer() {
