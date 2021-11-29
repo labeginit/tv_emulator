@@ -10,8 +10,6 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.example.tv.HomeController.mediationInfo;
-
 public class ChannelsController implements Initializable {
     @FXML
     ListView<String> list;
@@ -33,21 +31,21 @@ public class ChannelsController implements Initializable {
 
         Thread t1 = new Thread(() -> {
             while (true) {
-                int a = MenuController.lookForChange();
-                if (a == 2) {
-                    confirm();
-                    break;
-                } else if (a == 1) {
+                int option = Singleton.getInstance().lookForChange();
+                if (option == 1) {
                     turnOff();
                     break;
-                } else if (a == 3) {
+                } else if (option == 2) {
+                    confirm();
+                    break;
+                } else if (option == 3) {
                     goDown();
-                } else if (a == 4) {
+                } else if (option == 4) {
                     goUp();
-                } else if (a == 5) {
-                    mediationInfo(mediation, 1);
-                } else if (a == 6) {
-                    mediationInfo(mediation, 0);
+                } else if (option == 5) {
+                    Singleton.getInstance().mediationInfo(mediation, 1);
+                } else if (option == 6) {
+                    Singleton.getInstance().mediationInfo(mediation, 0);
                 }
             }
         });
@@ -83,14 +81,12 @@ public class ChannelsController implements Initializable {
         Platform.runLater(() -> {
             int a = list.getSelectionModel().getSelectedIndex();
             Singleton.getInstance().setChannel((a + 1));
-            Singleton.getInstance().setCommand(0);
             Singleton.getInstance().changeScene(anchorPane, "home-view.fxml");
         });
     }
 
     public void turnOff() {
         Platform.runLater(() -> {
-            Singleton.getInstance().setCommand(10);
             Singleton.getInstance().changeScene(anchorPane, "start-view.fxml");
         });
     }

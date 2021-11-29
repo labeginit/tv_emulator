@@ -16,26 +16,18 @@ public class StartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (Singleton.getInstance().getCommand() == 0) {
-            System.out.println("enter");
             ServerHandler serverHandler = new ServerHandler();
             serverHandler.start();
         }
 
         Thread t1 = new Thread(() -> {
-            while (Singleton.getInstance().getCommand() != 1) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+            Singleton.getInstance().lookForChange();
             startTV();
         });
         t1.start();
     }
 
     public void startTV() {
-        Singleton.getInstance().setCommand(9);
         Platform.runLater(() -> Singleton.getInstance().changeScene(anchorPane, "home-view.fxml"));
     }
 }

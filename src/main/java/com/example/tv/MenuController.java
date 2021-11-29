@@ -12,8 +12,6 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.example.tv.HomeController.mediationInfo;
-
 public class MenuController implements Initializable {
 
     @FXML
@@ -32,38 +30,25 @@ public class MenuController implements Initializable {
 
         Thread t1 = new Thread(() -> {
             while (true) {
-                int a = lookForChange();
-                if (a == 1) {
+                int option = Singleton.getInstance().lookForChange();
+                if (option == 1) {
                     turnOff();
                     break;
-                } else if (a == 2) {
+                } else if (option == 2) {
                     confirm();
                     break;
-                } else if (a == 3) {
+                } else if (option == 3) {
                     goDown();
-                } else if (a == 4) {
+                } else if (option == 4) {
                     goUp();
-                } else if (a == 5) {
-                    mediationInfo(mediation, 1);
-                } else if (a == 6) {
-                    mediationInfo(mediation, 0);
+                } else if (option == 5) {
+                    Singleton.getInstance().mediationInfo(mediation, 1);
+                } else if (option == 6) {
+                    Singleton.getInstance().mediationInfo(mediation, 0);
                 }
             }
         });
         t1.start();
-    }
-
-    static int lookForChange() {
-        while (Singleton.getInstance().getCommand() != 1 && Singleton.getInstance().getCommand() != 2 && Singleton.getInstance().getCommand() != 3 && Singleton.getInstance().getCommand() != 4 && Singleton.getInstance().getCommand() != 5 && Singleton.getInstance().getCommand() != 6) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        int a = Singleton.getInstance().getCommand();
-        Singleton.getInstance().setCommand(9);
-        return a;
     }
 
     public void goDown() {

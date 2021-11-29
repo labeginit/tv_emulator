@@ -23,7 +23,7 @@
         <Circle fill="#36ff1f" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
     </Pane>
     <Pane fx:id="mediation" layoutX="113.0" layoutY="198.0" prefHeight="209.0" prefWidth="591.0"
-          style="-fx-background-color: rgba(0,0,0,0.46);">
+          style="-fx-background-color: rgba(0,0,0,0.46);" visible="false">
         <Label alignment="CENTER" prefHeight="247.0" prefWidth="591.0"
                text="Low Mediation, TV will turn off in 20 Sec. Do command to Cancel" textAlignment="CENTER"
                textFill="WHITE" wrapText="true">

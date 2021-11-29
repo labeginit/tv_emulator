@@ -4,10 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class Singleton {
     private int channel = 1;
@@ -24,14 +26,6 @@ public class Singleton {
 
     public boolean isOn() {
         return on;
-    }
-
-    public Timer getMeditationTimer() {
-        return meditationTimer;
-    }
-
-    public void setMeditationTimer(Timer meditationTimer) {
-        this.meditationTimer = meditationTimer;
     }
 
     public void setOn(boolean on) {
@@ -82,6 +76,8 @@ public class Singleton {
         this.volume = volume;
     }
 
+    //Methods
+
     public void changeScene(AnchorPane event, String a) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(a));
         Parent mainCallWindowFXML = null;
@@ -96,5 +92,44 @@ public class Singleton {
         Scene mainCallWindow = new Scene(mainCallWindowFXML, 800, 700);
         stage.setScene(mainCallWindow);
         stage.show();
+    }
+
+    public int lookForChange() {
+        while (command != 1 && command != 2 && command != 3 && command != 4 && command != 5 && command != 6 && command != 7) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        int newCommand = command;
+        command = 9;
+        return newCommand;
+    }
+
+    public void mediationInfo(Pane mediation, int status) {
+        if (status == 1) {
+            mediation.setVisible(true);
+            Timer previousTimer = timer;
+            if (previousTimer != null) {
+                previousTimer.cancel();
+            }
+            Timer timer = new Timer();
+            timer.schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (Singleton.getInstance().isOn()) {
+                                Singleton.getInstance().setCommand(1);
+                            }
+                        }
+                    },
+                    20000
+            );
+            meditationTimer = timer;
+        } else {
+            mediation.setVisible(false);
+            meditationTimer.cancel();
+        }
     }
 }

@@ -13,8 +13,6 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class HomeController implements Initializable {
 
@@ -59,52 +57,25 @@ public class HomeController implements Initializable {
 
         Thread t1 = new Thread(() -> {
             while (true) {
-                int a = MenuController.lookForChange();
-                if (a == 2) {
-                    toMenu();
-                    break;
-                } else if (a == 1) {
+                int option = Singleton.getInstance().lookForChange();
+                if (option == 1) {
                     turnOff();
                     break;
-                } else if (a == 3) {
+                } else if (option == 2) {
+                    toMenu();
+                    break;
+                } else if (option == 3) {
                     volumeDown();
-                } else if (a == 4) {
-                    volumeUP();
-                } else if (a == 5) {
-                    mediationInfo(mediation, 1);
-                } else if (a == 6) {
-                    mediationInfo(mediation, 0);
+                } else if (option == 4) {
+                    volumeUp();
+                } else if (option == 5) {
+                    Singleton.getInstance().mediationInfo(mediation, 1);
+                } else if (option == 6) {
+                    Singleton.getInstance().mediationInfo(mediation, 0);
                 }
             }
         });
         t1.start();
-
-    }
-
-    static void mediationInfo(Pane mediations, int status) {
-        if (status == 1) {
-            mediations.setVisible(true);
-            Timer previousTimer = Singleton.getInstance().getTimer();
-            if (previousTimer != null) {
-                previousTimer.cancel();
-            }
-            Timer timer = new Timer();
-            timer.schedule(
-                    new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (Singleton.getInstance().isOn()) {
-                                Singleton.getInstance().setCommand(1);
-                            }
-                        }
-                    },
-                    20000
-            );
-            Singleton.getInstance().setMeditationTimer(timer);
-        } else {
-            mediations.setVisible(false);
-            Singleton.getInstance().getMeditationTimer().cancel();
-        }
 
     }
 
@@ -128,7 +99,7 @@ public class HomeController implements Initializable {
 
     }
 
-    public void volumeUP() {
+    public void volumeUp() {
         Platform.runLater(() -> {
             int tempVolume = Singleton.getInstance().getVolume() + 5;
 
@@ -193,7 +164,6 @@ public class HomeController implements Initializable {
     public void turnOff() {
         Platform.runLater(() -> {
             webView.getEngine().load(null);
-            Singleton.getInstance().setCommand(10);
             Singleton.getInstance().changeScene(anchorPane, "start-view.fxml");
         });
     }

@@ -28,6 +28,9 @@ public class ServerHandler extends Thread {
                 } else if (message.contains("channel")) {
                     JSONObject json = new JSONObject(message);
                     String channel = json.getString("channel");
+                    if (!Singleton.getInstance().isOn() && channel.equals("7")) {
+                        Singleton.getInstance().setOn(true);
+                    }
                     Singleton.getInstance().setCommand(Integer.parseInt(channel));
                 }
                 // 1 = start tv
@@ -36,6 +39,7 @@ public class ServerHandler extends Thread {
                 // 4 = channel up
                 // 5 = meditation pop up
                 // 6 = cancel meditation pop up
+                // 7 = Turn on TV with attention
             });
 
         } catch (URISyntaxException ex) {
