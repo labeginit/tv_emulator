@@ -7,28 +7,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<AnchorPane fx:id="anchorPane" prefHeight="656.0" prefWidth="800.0" style="-fx-background-color: #3a3939;"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.tv.ChannelsController">
-    <ListView fx:id="list" layoutY="-1.0" prefHeight="702.0" prefWidth="800.0" stylesheets="@styles.css"/>
-    <Pane layoutY="657.0" prefHeight="48.0" prefWidth="807.0" style="-fx-background-color: #170809;">
+
+<AnchorPane fx:id="anchorPane" prefHeight="656.0" prefWidth="800.0" style="-fx-background-color: #3a3939;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tv.ChannelsController">
+    <ListView fx:id="list" layoutY="-1.0" prefHeight="657.0" prefWidth="807.0" stylesheets="@styles.css" />
+    <Pane layoutY="657.0" prefHeight="48.0" prefWidth="807.0" style="-fx-background-color: #00203b;">
         <Label layoutX="372.0" layoutY="2.0" text="FC4" textFill="WHITE">
             <font>
-                <Font name="Arial Black" size="30.0"/>
+                <Font name="Arial Black" size="30.0" />
             </font>
             <effect>
-                <InnerShadow choke="0.11" height="18.03" radius="7.032500000000001" width="12.1"/>
+                <InnerShadow choke="0.11" height="18.03" radius="7.032500000000001" width="12.1" />
             </effect>
         </Label>
-        <Circle fill="#36ff1f" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle fill="#36ff1f" layoutX="780.0" layoutY="24.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
     </Pane>
-    <Pane fx:id="mediation" layoutX="113.0" layoutY="198.0" prefHeight="209.0" prefWidth="591.0"
-          style="-fx-background-color: rgba(0,0,0,0.46);" visible="false">
-        <Label alignment="CENTER" prefHeight="247.0" prefWidth="591.0"
-               text="Low Mediation, TV will turn off in 20 Sec. Do command to Cancel" textAlignment="CENTER"
-               textFill="WHITE" wrapText="true">
+    <Pane fx:id="mediation" layoutX="113.0" layoutY="198.0" prefHeight="209.0" prefWidth="591.0" style="-fx-background-color: rgba(0,0,0,0.46);" visible="false">
+        <Label alignment="CENTER" prefHeight="247.0" prefWidth="591.0" text="Low Mediation, TV will turn off in 20 Sec. Do command to Cancel" textAlignment="CENTER" textFill="WHITE" wrapText="true">
             <font>
-                <Font name="Apple Symbols" size="38.0"/>
+                <Font name="Apple Symbols" size="38.0" />
             </font>
         </Label>
     </Pane>
